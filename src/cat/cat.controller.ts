@@ -1,5 +1,6 @@
+import { CreateCatDto } from './cat.dto';
 import { CatService } from './cat.service';
-import { Controller, Delete, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
 
 @Controller('cat')
 export class CatController {
@@ -7,13 +8,13 @@ export class CatController {
         private readonly catService:CatService
     ){}
     @Post()
-    async createCat() {
-        return [];
+    async createCat(@Body() cat: CreateCatDto) {
+        return this.catService.create(cat);
     }
 
     @Get()
     async listAll() {
-        return [];
+        return this.catService.findAll();
     }
 
     @Delete()
